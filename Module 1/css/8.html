@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.eventCard {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 500px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px 0;
+}
+input:focus {
+  outline: 2px solid #007BFF;
+  border-color: transparent;
+}
+.hidden {
+  visibility: hidden;
+}
+.none {
+  display: none;
+}
+</style>
+</head>
+<body>
+  <div class="eventCard">
+    <h3>Register for Event</h3>
+    <input type="text" placeholder="Your name">
+    <p class="hidden">This text is hidden but takes space</p>
+    <p class="none">This text is completely removed</p>
+  </div>
+</body>
+</html>

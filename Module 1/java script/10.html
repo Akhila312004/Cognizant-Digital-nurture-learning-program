@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modern JavaScript</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .output {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="feature-card">
+        <h2>Modern JavaScript Features</h2>
+        
+        <h3>Default Parameters</h3>
+        <button onclick="demoDefaultParams()">Greet User</button>
+        <div class="output" id="defaultParamOutput"></div>
+        
+        <h3>Destructuring</h3>
+        <button onclick="demoDestructuring()">Destructure Event</button>
+        <div class="output" id="destructuringOutput"></div>
+        
+        <h3>Spread Operator</h3>
+        <button onclick="demoSpread()">Clone Events</button>
+        <div class="output" id="spreadOutput"></div>
+    </div>
+
+    <script>
+        // Default parameters
+        function greet(name = "Guest") {
+            return `Welcome, ${name}!`;
+        }
+
+        // Destructuring
+        const event = { 
+            name: "Community Concert", 
+            date: "2025-06-20",
+            location: "City Park" 
+        };
+
+        // Spread operator
+        const events = [
+            { name: "Yoga Workshop", category: "Wellness" },
+            { name: "Live Concert", category: "Music" }
+        ];
+
+        function demoDefaultParams() {
+            document.getElementById('defaultParamOutput').innerHTML = 
+                `${greet()}<br>${greet("Alice")}`;
+        }
+
+        function demoDestructuring() {
+            const { name, date } = event;
+            document.getElementById('destructuringOutput').innerHTML = 
+                `Extracted: ${name} on ${date}`;
+        }
+
+        function demoSpread() {
+            const originalEvents = [...events];
+            originalEvents.push({ name: "Art Show", category: "Art" });
+            
+            document.getElementById('spreadOutput').innerHTML = 
+                `Original: ${JSON.stringify(events)}<br><br>
+                 Clone with new event: ${JSON.stringify(originalEvents)}`;
+        }
+    </script>
+</body>
+</html>

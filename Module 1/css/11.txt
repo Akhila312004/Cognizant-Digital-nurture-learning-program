@@ -1,0 +1,12 @@
+11. Debug and Test with Dev Tools and VS Code
+Objective: Test and debug CSS.
+
+Answer:
+
+Step 1 :- Open Chrome DevTools (F12 or right-click > Inspect).
+
+Step 2 :- Use Device Toolbar (toggle device view) to test on different screen sizes.
+
+Step 3 :- Select any element → Styles tab to see applied styles and test live changes.
+
+Step 4 :- Use Network tab to verify external CSS file loads correctly (should show status 200).

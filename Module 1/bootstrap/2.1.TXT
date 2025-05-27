@@ -1,0 +1,12 @@
+Exercise 2.1: Explore the structure of the downloaded Bootstrap directory. Identify and explain the purpose of the CSS, JS, and icons folders.
+
+css/: This folder contains the compiled CSS files of Bootstrap.
+bootstrap.css: The full, unminified CSS.
+bootstrap.min.css: The minified version of the CSS, used for production to reduce file size.
+Source maps (.css.map files) are also often included for debugging.
+js/: This folder contains the compiled JavaScript files of Bootstrap.
+bootstrap.js: The full, unminified JavaScript plugins.
+bootstrap.min.js: The minified version of the JavaScript plugins.
+bootstrap.bundle.js and bootstrap.bundle.min.js: These include Popper.js, which is necessary for some Bootstrap components like dropdowns, tooltips, and popovers.
+Source maps (.js.map files) are also often included for debugging.
+icons/: If you downloaded the Bootstrap Icons separately, this folder contains the SVG icon files. Bootstrap 5 doesn't include icons by default; you need to install them separately (e.g., via npm: @fortawesome/bootstrap-icons).

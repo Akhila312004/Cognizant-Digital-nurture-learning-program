@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Management</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .function-card {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        button {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .output {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Functions</h1>
+        
+        <div class="function-card">
+            <h3>Add Event</h3>
+            <button onclick="demoAddEvent()">Create Music Event</button>
+            <div class="output" id="addEventOutput"></div>
+        </div>
+        
+        <div class="function-card">
+            <h3>Register User</h3>
+            <button onclick="demoRegisterUser()">Register User</button>
+            <div class="output" id="registerOutput"></div>
+        </div>
+        
+        <div class="function-card">
+            <h3>Category Tracker (Closure)</h3>
+            <button onclick="demoTracker()">Track Music Category</button>
+            <div class="output" id="trackerOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        // Core functions
+        function addEvent(name, category) {
+            return { name, category };
+        }
+
+        function registerUser(user, event) {
+            return `${user} registered for ${event.name}`;
+        }
+
+        function filterEventsByCategory(events, category) {
+            return events.filter(e => e.category === category);
+        }
+
+        // Closure example
+        function categoryTracker() {
+            let total = 0;
+            return function() {
+                total++;
+                return `Music events tracked: ${total}`;
+            };
+        }
+        const trackMusic = categoryTracker();
+
+        // Demo functions
+        function demoAddEvent() {
+            const event = addEvent("Summer Festival", "Music");
+            document.getElementById('addEventOutput').innerHTML = 
+                `Created event: ${JSON.stringify(event)}`;
+        }
+
+        function demoRegisterUser() {
+            const event = addEvent("Community Workshop", "Education");
+            const message = registerUser("Sarah Johnson", event);
+            document.getElementById('registerOutput').innerHTML = message;
+        }
+
+        function demoTracker() {
+            document.getElementById('trackerOutput').innerHTML = trackMusic();
+        }
+    </script>
+</body>
+</html>

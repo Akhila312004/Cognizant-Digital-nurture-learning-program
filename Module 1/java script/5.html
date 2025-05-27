@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Objects</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .event-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+        .availability {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .unavailable {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="event-card">
+        <h2 id="eventName">Event Name</h2>
+        <p id="eventDate">Date: </p>
+        <p id="eventSeats">Seats: </p>
+        <div id="availability" class="availability"></div>
+        <button onclick="checkAvail()">Check Availability</button>
+        <button onclick="showEntries()">Show Object Entries</button>
+    </div>
+
+    <script>
+        function Event(name, date, seats) {
+            this.name = name;
+            this.date = date;
+            this.seats = seats;
+        }
+
+        Event.prototype.checkAvailability = function() {
+            return this.seats > 0;
+        };
+
+        // Create event instance
+        const concert = new Event("Rock Night", "2025-08-20", 20);
+        
+        // Display event info
+        document.getElementById('eventName').textContent = concert.name;
+        document.getElementById('eventDate').textContent += concert.date;
+        document.getElementById('eventSeats').textContent += concert.seats;
+        
+        function checkAvail() {
+            const isAvailable = concert.checkAvailability();
+            const availElement = document.getElementById('availability');
+            availElement.textContent = isAvailable ? "Available" : "Sold Out";
+            availElement.className = isAvailable ? "availability available" : "availability unavailable";
+        }
+        
+        function showEntries() {
+            alert("Object entries:\n" + 
+                JSON.stringify(Object.entries(concert), null, 2));
+        }
+    </script>
+</body>
+</html>

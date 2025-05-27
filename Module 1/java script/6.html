@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Array Methods</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .array-methods {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .event-card {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .music-event {
+            border-left: 4px solid #3498db;
+        }
+        .wellness-event {
+            border-left: 4px solid #2ecc71;
+        }
+        .art-event {
+            border-left: 4px solid #9b59b6;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="array-methods">
+        <h1>Event Array Methods</h1>
+        <button onclick="addEvent()">Add Art Show</button>
+        <button onclick="filterMusic()">Filter Music Events</button>
+        <button onclick="displayCards()">Display Event Cards</button>
+        
+        <div id="eventsContainer"></div>
+        <div id="filteredContainer"></div>
+        <div id="cardsContainer"></div>
+    </div>
+
+    <script>
+        let events = [
+            { name: "Yoga Workshop", category: "Wellness" },
+            { name: "Live Concert", category: "Music" }
+        ];
+
+        function addEvent() {
+            events.push({ name: "Art Show", category: "Art" });
+            displayEvents();
+            console.log("Added Art Show:", events);
+        }
+
+        function filterMusic() {
+            const musicEvents = events.filter(e => e.category === "Music");
+            const container = document.getElementById('filteredContainer');
+            container.innerHTML = "<h3>Music Events:</h3>";
+            
+            musicEvents.forEach(event => {
+                const div = document.createElement('div');
+                div.className = 'event-card music-event';
+                div.textContent = event.name;
+                container.appendChild(div);
+            });
+        }
+
+        function displayCards() {
+            const cards = events.map(e => 
+                `<div class="event-card ${e.category.toLowerCase()}-event">
+                    ${e.name} - ${e.category}
+                </div>`
+            );
+            document.getElementById('cardsContainer').innerHTML = 
+                "<h3>All Events:</h3>" + cards.join('');
+        }
+
+        function displayEvents() {
+            document.getElementById('eventsContainer').innerHTML = 
+                "<h3>Current Events:</h3><pre>" + 
+                JSON.stringify(events, null, 2) + "</pre>";
+        }
+
+        // Initial display
+        displayEvents();
+    </script>
+</body>
+</html>

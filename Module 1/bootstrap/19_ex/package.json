@@ -1,0 +1,11 @@
+{
+  "name": "bootstrap-sass-custom",
+  "version": "1.0.0",
+  "scripts": {
+    "build-css": "sass scss/custom.scss dist/style.css"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.63.6"
+  }
+}

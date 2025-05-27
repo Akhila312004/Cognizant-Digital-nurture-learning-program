@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event DOM Manipulation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        #eventList {
+            margin: 20px 0;
+        }
+        .event-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .event-card:hover {
+            transform: translateY(-2px);
+        }
+        #status {
+            padding: 10px;
+            background-color: #e8f4fc;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        button {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event DOM Manipulation</h1>
+    <button onclick="loadEvents()">Load Events</button>
+    <button onclick="updateStatus()">Update Status</button>
+    
+    <div id="status">Ready to load events...</div>
+    <div id="eventList"></div>
+
+    <script>
+        const events = [
+            { name: "Community Cleanup", category: "Volunteer" },
+            { name: "Jazz Night", category: "Music" },
+            { name: "Cooking Class", category: "Workshop" }
+        ];
+
+        function loadEvents() {
+            const eventList = document.querySelector("#eventList");
+            eventList.innerHTML = '';
+            
+            events.forEach(event => {
+                const card = document.createElement("div");
+                card.className = "event-card";
+                card.innerHTML = `
+                    <h3>${event.name}</h3>
+                    <p>Category: ${event.category}</p>
+                `;
+                eventList.appendChild(card);
+            });
+            
+            updateUI(`${events.length} events loaded`);
+        }
+
+        function updateUI(message) {
+            document.querySelector("#status").textContent = message;
+        }
+
+        function updateStatus() {
+            updateUI(`Last updated: ${new Date().toLocaleTimeString()}`);
+        }
+    </script>
+</body>
+</html>

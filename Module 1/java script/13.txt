@@ -1,0 +1,9 @@
+
+13. Debugging and Testing
+1) Open Chrome DevTools > Console to view console.log(), errors.
+
+2) Use Network tab to check fetch request, response status.
+
+3) Set breakpoints in JS file via Sources tab to inspect variables.
+
+4) Log step-by-step inside form submission to trace logic.

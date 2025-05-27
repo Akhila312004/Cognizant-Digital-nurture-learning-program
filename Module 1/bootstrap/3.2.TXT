@@ -1,0 +1,5 @@
+Exercise 3.2: Use .container, .row, and .col-* classes appropriately for responsive design.
+
+.container: Provides a responsive fixed-width container (or container-fluid for a full-width container). It centers your content and adds padding.
+.row: Creates horizontal groups of columns. Columns should be immediate children of rows.
+.col-*: Specifies the width of a column. The breakpoint suffix (-sm, -md, -lg, -xl, -xxl) determines when the column width applies. Without a breakpoint suffix (.col-*), the width applies to all screen sizes. You can also use .col for equal-width columns.

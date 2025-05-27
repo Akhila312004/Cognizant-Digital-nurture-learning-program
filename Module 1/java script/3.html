@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Management</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .event-list {
+            margin: 20px 0;
+        }
+        .event-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        .event-item:last-child {
+            border-bottom: none;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .full {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .error-message {
+            color: #dc3545;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+        select, button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Management</h1>
+        
+        <div class="error-message" id="errorMsg"></div>
+        
+        <div class="event-list" id="eventList"></div>
+        
+        <div>
+            <select id="eventFilter">
+                <option value="all">All Events</option>
+                <option value="available">Available Only</option>
+            </select>
+            <button id="refreshBtn">Refresh Events</button>
+        </div>
+    </div>
+
+    <script>
+        const events = [
+            { name: "Community Concert", date: "2025-06-10", capacity: 50, registered: 45 },
+            { name: "Art Workshop", date: "2025-06-15", capacity: 20, registered: 20 },
+            { name: "Farmers Market", date: "2025-06-20", capacity: 100, registered: 30 }
+        ];
+
+        function displayEvents(filter = 'all') {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+            
+            try {
+                let filteredEvents = events;
+                if (filter === 'available') {
+                    filteredEvents = events.filter(event => event.registered < event.capacity);
+                    if (filteredEvents.length === 0) {
+                        throw new Error("No available events found");
+                    }
+                }
+                
+                filteredEvents.forEach(event => {
+                    const isAvailable = event.registered < event.capacity;
+                    const eventElement = document.createElement('div');
+                    eventElement.className = 'event-item';
+                    eventElement.innerHTML = `
+                        <div>
+                            <strong>${event.name}</strong><br>
+                            ${event.date} | ${event.registered}/${event.capacity} participants
+                        </div>
+                        <span class="status ${isAvailable ? 'available' : 'full'}">
+                            ${isAvailable ? 'Available' : 'Full'}
+                        </span>
+                    `;
+                    eventList.appendChild(eventElement);
+                });
+                
+                document.getElementById('errorMsg').style.display = 'none';
+            } catch (error) {
+                document.getElementById('errorMsg').textContent = error.message;
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+        
+        document.getElementById('eventFilter').addEventListener('change', function() {
+            displayEvents(this.value);
+        });
+        
+        document.getElementById('refreshBtn').addEventListener('click', function() {
+            // Simulate updating event data
+            events.forEach(event => {
+                event.registered += Math.floor(Math.random() * 5) - 2;
+                if (event.registered < 0) event.registered = 0;
+            });
+            displayEvents(document.getElementById('eventFilter').value);
+        });
+        
+        // Initial display
+        displayEvents();
+    </script>
+</body>
+</html>
