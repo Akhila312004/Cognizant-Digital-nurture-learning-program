@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Promo Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .video-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        video {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .video-message {
+            color: #2c3e50;
+            font-weight: bold;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <h2>Watch Our Community Promo</h2>
+        <video controls id="promoVideo">
+            <source src="promo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-message" id="readyMessage">
+            Video is ready to play!
+        </div>
+        <button class="btn" onclick="document.getElementById('promoVideo').play()">
+            <i class="fas fa-play"></i> Play Video
+        </button>
+    </div>
+
+    <script>
+        // Video ready notification
+        document.getElementById('promoVideo').addEventListener('canplay', function() {
+            const message = document.getElementById('readyMessage');
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        });
+        
+        // Before unload confirmation only if video is playing
+        window.addEventListener('beforeunload', function(e) {
+            const video = document.getElementById('promoVideo');
+            if (!video.paused) {
+                e.preventDefault();
+                e.returnValue = 'Are you sure you want to leave? Your video is still playing.';
+            }
+        });
+    </script>
+</body>
+</html>

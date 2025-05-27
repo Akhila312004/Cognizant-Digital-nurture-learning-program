@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Community Event Registration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        input, select, textarea, button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+        }
+        
+        .phone-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .fee-display {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .char-count {
+            color: #7f8c8d;
+            font-size: 14px;
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #27ae60;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .image-preview:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Event Registration</h2>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter 10-digit number" onblur="validatePhone(this)">
+            <div class="phone-error" id="phoneError">Please enter a valid 10-digit phone number</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="event">Select Event</label>
+            <select id="event" onchange="displayFee(this.value)">
+                <option value="Free">Community Cleanup</option>
+                <option value="$10">Music Concert</option>
+                <option value="$15">Art Workshop</option>
+                <option value="$5">Local Farmers Market</option>
+            </select>
+            <div class="fee-display" id="feeDisplay"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea id="comments" rows="4" placeholder="Enter your comments here..." onkeyup="countChars(this.value)"></textarea>
+            <div class="char-count" id="charCount">Characters: 0</div>
+        </div>
+        
+        <button onclick="submitForm()">Submit Registration</button>
+        
+        <img src="img.jpg" class="image-preview" ondblclick="toggleImageSize(this)" alt="Event Preview">
+    </div>
+
+    <script>
+        function validatePhone(input) {
+            const phoneError = document.getElementById('phoneError');
+            if (!/^\d{10}$/.test(input.value)) {
+                phoneError.style.display = 'block';
+                input.style.borderColor = '#e74c3c';
+            } else {
+                phoneError.style.display = 'none';
+                input.style.borderColor = '#2ecc71';
+            }
+        }
+
+        function displayFee(value) {
+            const feeDisplay = document.getElementById('feeDisplay');
+            if (value === "Free") {
+                feeDisplay.textContent = "This is a free community event!";
+                feeDisplay.style.color = '#2ecc71';
+            } else {
+                feeDisplay.textContent = `Event Fee: ${value}`;
+                feeDisplay.style.color = '#3498db';
+            }
+            feeDisplay.style.display = 'block';
+        }
+
+        function countChars(val) {
+            document.getElementById('charCount').textContent = `Characters: ${val.length}`;
+        }
+
+        function toggleImageSize(img) {
+            if (img.style.width === '400px') {
+                img.style.width = '100%';
+            } else {
+                img.style.width = '400px';
+            }
+        }
+
+        function submitForm() {
+            // Form validation would go here
+            showNotification('Thank you! Your registration has been submitted.');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#2ecc71';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            notification.style.zIndex = '1000';
+            notification.style.animation = 'fadeIn 0.3s';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Navigation</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        nav a:active {
+            transform: translateY(0);
+        }
+        
+        /* Help link style */
+        nav a[target="_blank"] {
+            background-color: #e74c3c;
+            float: right;
+        }
+        
+        nav a[target="_blank"]:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Section Styles */
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #home {
+            background-color: #f8f9fa;
+        }
+        
+        #events {
+            background-color: #e9ecef;
+        }
+        
+        #contact {
+            background-color: #dee2e6;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        section p {
+            max-width: 800px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            nav a[target="_blank"] {
+                float: none;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="help.html" target="_blank">Help</a>
+    </nav>
+    
+    <section id="home">
+        <h2>Welcome Home</h2>
+        <p>Discover amazing experiences and connect with our community. Start your journey with us today.</p>
+    </section>
+    
+    <section id="events">
+        <h2>Upcoming Events</h2>
+        <p>Explore our exciting lineup of events designed to inspire and engage.</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <p>We'd love to hear from you. Reach out for questions, feedback, or partnership opportunities.</p>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

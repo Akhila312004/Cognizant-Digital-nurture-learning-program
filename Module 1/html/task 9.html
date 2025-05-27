@@ -1,0 +1,25 @@
+<button onclick="findEvents()">Find Nearby Events</button>
+<p id="location"></p>
+
+<script>
+  function findEvents() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPos, showError, { enableHighAccuracy: true });
+    } else {
+      alert("Geolocation not supported.");
+    }
+  }
+
+  function showPos(position) {
+    document.getElementById('location').innerText =
+      `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+  }
+
+  function showError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED: alert("Permission denied"); break;
+      case error.TIMEOUT: alert("Timeout"); break;
+      default: alert("Error occurred");
+    }
+  }
+</script>

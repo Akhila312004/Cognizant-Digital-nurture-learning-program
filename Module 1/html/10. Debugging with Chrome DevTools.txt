@@ -1,0 +1,16 @@
+10. Debugging with Chrome DevTools
+
+
+Objective: Test and fix layout or script issues.
+
+Answer:
+
+Step 1 :- Open Chrome DevTools (F12).
+
+Step 2 :- Use Elements tab to inspect HTML and live-edit CSS.
+
+Step 3 :- Use Console tab to see errors, run console.log() statements.
+
+Step 4 :- Go to Sources tab, click on your script file, and set breakpoints.
+
+Step 5 :- Reload the page and watch values as your JS runs.
